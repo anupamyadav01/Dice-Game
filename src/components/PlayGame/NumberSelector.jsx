@@ -1,15 +1,18 @@
-import { useState } from "react";
 import styled from "styled-components";
-
-const NumberSelector = () => {
+import PropTypes from "prop-types";
+const NumberSelector = ({ selectNumber, setSelectNumber, error, setError }) => {
   const numbers = [1, 2, 3, 4, 5, 6];
-  const [selectNumber, setSelectNumber] = useState();
+
   return (
     <SelectNumberContainer>
+      <p className="error"> {error}</p>
       <div>
         {numbers.map((item, i) => (
           <Box
-            onClick={() => setSelectNumber(item)}
+            onClick={() => {
+              setSelectNumber(item);
+              setError("");
+            }}
             key={i}
             isSelected={item === selectNumber}
           >
@@ -22,13 +25,20 @@ const NumberSelector = () => {
   );
 };
 
+NumberSelector.propTypes = {
+  selectNumber: PropTypes.number.isRequired,
+  setSelectNumber: PropTypes.func.isRequired,
+};
+
 export default NumberSelector;
 
 const SelectNumberContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-
+  .error {
+    color: red;
+  }
   div {
     display: flex;
   }
@@ -46,8 +56,8 @@ const Box = styled.div`
   height: 72px;
   border: 1px solid black;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: center !important;
+  align-items: center !important;
   fontweight: 700;
   font-size: 24px;
   place-item: center;

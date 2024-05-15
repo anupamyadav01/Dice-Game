@@ -1,10 +1,9 @@
 import { useState } from "react";
 import PlayGame from "./components/PlayGame/PlayGame";
 import StartGame from "./components/StartGame/StartGame";
-import RoleDice from "./components/PlayGame/RoleDice";
 
 function App() {
-  const [gameStarted, setGameStarted] = useState(true);
+  const [gameStarted, setGameStarted] = useState(false);
 
   const toggleGamePlay = () => {
     setGameStarted((perv) => !perv);
@@ -17,7 +16,6 @@ function App() {
       ) : (
         <StartGame toggleGamePlay={toggleGamePlay} />
       )}
-      <RoleDice />
     </>
   );
 }

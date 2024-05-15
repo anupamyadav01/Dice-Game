@@ -1,4 +1,4 @@
-import { useState } from "react";
+import PropTypes from "prop-types";
 
 import styled from "styled-components";
 import dice1 from "../../dies/dice_1.png";
@@ -8,23 +8,22 @@ import dice4 from "../../dies/dice_4.png";
 import dice5 from "../../dies/dice_5.png";
 import dice6 from "../../dies/dice_6.png";
 
-const RoleDice = () => {
-  const [randomNumber, setRandomNumber] = useState(1);
-  const generateRandomNumber = () => {
-    const Number = Math.floor(Math.random() * 6);
-    console.log(Number);
-    setRandomNumber(Number);
-  };
+const RoleDice = ({ randomNumber, startGame }) => {
   const diceImages = [dice1, dice2, dice3, dice4, dice5, dice6];
 
   return (
     <RoleDiceContainer>
-      <div onClick={generateRandomNumber}>
-        <img src={diceImages[randomNumber]} alt="" />
+      <div onClick={startGame}>
+        <img src={diceImages[randomNumber - 1]} alt="" />
       </div>
       <p>Click on dice to roll</p>
     </RoleDiceContainer>
   );
+};
+
+RoleDice.propTypes = {
+  randomNumber: PropTypes.number.isRequired,
+  generateRandomNumber: PropTypes.func.isRequired,
 };
 
 export default RoleDice;
